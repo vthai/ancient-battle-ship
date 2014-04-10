@@ -28,5 +28,11 @@
          <version>3.2</version>
          <scope>test</scope>
       </dependency>
+
+      <dependency>
+         <groupId>se.jbee</groupId>
+         <artifactId>silk-di</artifactId>
+         <version>0.6</version>
+      </dependency>
    </dependencies>
 </project>
