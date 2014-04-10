@@ -1,11 +1,13 @@
 package org.vthai.game.ancientbattleship.battlefield;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OceanInvalidCoordinatesException;
 import org.vthai.game.ancientbattleship.battlefield.objects.Occupiable;
 import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
-import org.vthai.game.ancientbattleship.battlefield.validator.RangeValidator;
 import org.vthai.game.ancientbattleship.battlefield.validator.Validator;
 import org.vthai.game.ancientbattleship.message.Message;
 
@@ -18,7 +20,9 @@ public class Ocean {
    
    private int column;
    
-   private Validator rangeValidator = new RangeValidator();
+   @Inject
+   @Named("oceanRangeValidator")
+   private Validator rangeValidator;
    
    public Ocean(int row, int column) {
       defineRowColumn(row, column);
