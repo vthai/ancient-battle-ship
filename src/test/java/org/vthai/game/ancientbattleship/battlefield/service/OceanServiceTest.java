@@ -1,8 +1,10 @@
 package org.vthai.game.ancientbattleship.battlefield.service;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 
+import org.easymock.IMocksControl;
 import org.junit.Before;
 import org.junit.Test;
 import org.vthai.game.ancientbattleship.battlefield.Ocean;
@@ -20,21 +22,26 @@ public class OceanServiceTest {
    
    @Before
    public void setUp() {
-      mock = createMock(Ocean.class);
+      IMocksControl mockControl = createControl();
+      mock = mockControl.createMock(Ocean.class);
       objectToBeTest = new OceanEventServiceImpl(mock);
    }
    
    @Test
    public void testPlaceShip() {
-      
-      replay(mock);
-      
+      final Coordinate coordinate = new Coordinate(20, 7);
       Event event = new Event();
       Ship ship = new DragonShip();
       event.setEventOriginator(ship);
-      event.setEventTarget(new Coordinate(20, 7));
+      event.setEventTarget(coordinate);
       event.setEventType(EventType.PLACE);
       
+      mock.occupyAtCoordinate(coordinate, ship);
+      
+      replay(mock);
+      
       objectToBeTest.processEvent(event);
+      
+      verify(mock);
    }
 }

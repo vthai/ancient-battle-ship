@@ -1,5 +1,7 @@
 package org.vthai.game.ancientbattleship.battlefield.service;
 
+import javax.inject.Inject;
+
 import org.vthai.game.ancientbattleship.battlefield.Ocean;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordinate;
@@ -7,9 +9,10 @@ import org.vthai.game.ancientbattleship.battlefield.event.Event;
 import org.vthai.game.ancientbattleship.battlefield.event.EventType;
 
 public class OceanEventServiceImpl implements OceanEventService {
-
+   
    private Ocean ocean;
-
+   
+   @Inject
    public OceanEventServiceImpl(Ocean ocean) {
       this.ocean = ocean;
    }

@@ -11,45 +11,45 @@ import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
 import org.vthai.game.ancientbattleship.battlefield.validator.Validator;
 import org.vthai.game.ancientbattleship.message.Message;
 
-
 public class Ocean {
-   
+
    private OccupiableCoordinate[][] coordinates;
-   
+
    private int row;
-   
+
    private int column;
-   
-   @Inject
-   @Named("oceanRangeValidator")
+
    private Validator rangeValidator;
-   
-   public Ocean(int row, int column) {
+
+   @Inject
+   public Ocean(@Named("oceanRangeValidator") Validator rangValidator, @Named("oceanRow") int row,
+         @Named("oceanColumn") int column) {
       defineRowColumn(row, column);
       initializeArea();
+      this.rangeValidator = rangValidator;
    }
-   
+
    public void initializeArea() {
       coordinates = new OccupiableCoordinate[column][row];
       Occupiable voidness = new Voidness();
-      
-      for(int x = 0; x < column; x++) {
-         for(int y = 0; y < row; y++) {
+
+      for (int x = 0; x < column; x++) {
+         for (int y = 0; y < row; y++) {
             coordinates[x][y] = new OccupiableCoordinate(x, y, voidness);
          }
       }
    }
-   
+
    public OccupiableCoordinate queryCoordinate(int x, int y) {
       rangeValidator.validate(OceanInvalidCoordinatesException.class,
             Message.getString("ocean.invalid.coordinate.x", column), x, 0, column);
-      
+
       rangeValidator.validate(OceanInvalidCoordinatesException.class,
             Message.getString("ocean.invalid.coordinate.y", row), y, 0, row);
-      
+
       return coordinates[x][y];
    }
-   
+
    private void defineRowColumn(int row, int column) {
       // validation code can go here
       this.row = row;
@@ -62,6 +62,6 @@ public class Ocean {
 
    public void removeAtCoordinate(Coordinate coordinate, Occupiable eventOriginator) {
       // TODO Auto-generated method stub
-      
+
    }
 }
