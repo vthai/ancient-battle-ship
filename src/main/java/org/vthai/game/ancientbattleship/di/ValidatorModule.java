@@ -12,9 +12,11 @@ import dagger.Provides;
 @Module(library = true)
 public class ValidatorModule {
 
+   public static final String oceanRangeValidatorId = "oceanRangeValidator";
+
    @Provides
    @Singleton
-   @Named("oceanRangeValidator")
+   @Named(ValidatorModule.oceanRangeValidatorId)
    public Validator providesRangeValidator() {
       return new RangeValidator();
    }

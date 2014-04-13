@@ -9,6 +9,8 @@ import org.vthai.game.ancientbattleship.battlefield.coordinate.OceanInvalidCoord
 import org.vthai.game.ancientbattleship.battlefield.objects.Occupiable;
 import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
 import org.vthai.game.ancientbattleship.battlefield.validator.Validator;
+import org.vthai.game.ancientbattleship.di.ConfigureModule;
+import org.vthai.game.ancientbattleship.di.ValidatorModule;
 import org.vthai.game.ancientbattleship.message.Message;
 
 public class Ocean {
@@ -22,8 +24,9 @@ public class Ocean {
    private Validator rangeValidator;
 
    @Inject
-   public Ocean(@Named("oceanRangeValidator") Validator rangValidator, @Named("oceanRow") int row,
-         @Named("oceanColumn") int column) {
+   public Ocean(@Named(ValidatorModule.oceanRangeValidatorId) Validator rangValidator, 
+         @Named(ConfigureModule.oceanRowId) int row,
+         @Named(ConfigureModule.oceanColumnId) int column) {
       defineRowColumn(row, column);
       initializeArea();
       this.rangeValidator = rangValidator;

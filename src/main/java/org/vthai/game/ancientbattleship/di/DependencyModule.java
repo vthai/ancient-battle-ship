@@ -2,7 +2,7 @@ package org.vthai.game.ancientbattleship.di;
 
 import javax.inject.Singleton;
 
-import org.vthai.game.ancientbattleship.battlefield.AncientBattleShipApp;
+import org.vthai.game.ancientbattleship.AncientBattleShipApp;
 import org.vthai.game.ancientbattleship.battlefield.service.OceanEventService;
 import org.vthai.game.ancientbattleship.battlefield.service.OceanEventServiceImpl;
 

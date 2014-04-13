@@ -2,7 +2,7 @@ package org.vthai.game.inttest;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.vthai.game.ancientbattleship.battlefield.AncientBattleShipApp;
+import org.vthai.game.ancientbattleship.AncientBattleShipApp;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
 import org.vthai.game.ancientbattleship.battlefield.event.Event;
 import org.vthai.game.ancientbattleship.battlefield.event.EventType;
