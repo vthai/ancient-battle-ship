@@ -124,6 +124,25 @@ public class OceanTest {
       OccupiableCoordinate occupiableCoordinate = ocean.queryCoordinate(coordinate.getX(), coordinate.getY());
       assertThat(occupiableCoordinate.getOccupiable().hashCode(), equalTo(ship.hashCode()));
    }
+   
+   @Test
+   public void testOccupyACoordinateDoNotCareAlreadyOcuppied() {
+      Ship shipOld = new DragonShip();
+      
+      Ship shipNew = new DragonShip();
+      Coordinate coordinate = new Coordinate(20, 10);
+
+      ocean.occupyAtCoordinate(coordinate, shipOld);
+
+      OccupiableCoordinate occupiableCoordinate = ocean.queryCoordinate(coordinate.getX(), coordinate.getY());
+      assertThat(occupiableCoordinate.getOccupiable().hashCode(), equalTo(shipOld.hashCode()));
+      
+      ocean.occupyAtCoordinate(coordinate, shipNew);
+      
+      occupiableCoordinate = ocean.queryCoordinate(coordinate.getX(), coordinate.getY());
+      assertThat(occupiableCoordinate.getOccupiable().hashCode(), equalTo(shipNew.hashCode()));
+   }
+
 
    @Test
    public void testOccupyACoordinateCheckSurrond() {

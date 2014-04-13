@@ -1,8 +1,7 @@
 package org.vthai.game.ancientbattleship.battlefield.validator;
 
-import java.lang.reflect.InvocationTargetException;
 
-public class RangeValidator implements Validator {
+public class RangeValidator extends GenericValidator {
 
    private static final int UPPER_BOUND = 1;
 
@@ -15,15 +14,7 @@ public class RangeValidator implements Validator {
       int lowerBound = (int) range[LOWER_BOUND];
 
       if (valueToBeValidated < lowerBound || valueToBeValidated > upperBound) {
-         try {
-            RuntimeException exception = (RuntimeException) exceptionClass.getConstructor(String.class).newInstance(
-                  errorMessage);
-            throw exception;
-         }
-         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-               | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace();
-         }
+         throwExpection(exceptionClass, errorMessage);
       }
    }
 }
