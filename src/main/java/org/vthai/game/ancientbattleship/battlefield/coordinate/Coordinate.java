@@ -18,4 +18,13 @@ public class Coordinate {
    public int getY() {
       return y;
    }
+   
+   @Override
+   public boolean equals(Object obj) {
+      if(!obj.getClass().equals(this.getClass())) {
+         return false;
+      }
+      Coordinate target = (Coordinate) obj;
+      return target.getX() == this.getX() && target.getY() == this.getY();
+   }
 }

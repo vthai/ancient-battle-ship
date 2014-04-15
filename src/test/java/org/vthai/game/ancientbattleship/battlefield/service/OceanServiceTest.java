@@ -3,8 +3,7 @@ package org.vthai.game.ancientbattleship.battlefield.service;
 import static org.easymock.EasyMock.createStrictControl;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.expectLastCall;
 
 import org.easymock.IMocksControl;
 import org.junit.Before;
@@ -29,9 +28,9 @@ public class OceanServiceTest {
    private Ocean oceanMock;
 
    private CoordinateValidator coordinateValidatorMock;
-   
+
    private IMocksControl mockControl;
-   
+
    @Rule
    public ExpectedException thrown = ExpectedException.none();
 
@@ -52,7 +51,7 @@ public class OceanServiceTest {
       event.setEventOriginator(ship);
       event.setEventTarget(coordinate);
       event.setEventType(EventType.PLACE);
-      
+
       OccupiableCoordinate occupiableCoordinateReturnedByOcean = new OccupiableCoordinate(coordinate.getX(),
             coordinate.getY(), new Voidness());
       expect(oceanMock.queryCoordinate(eq(coordinate.getX()), eq(coordinate.getY()))).andReturn(
@@ -60,11 +59,11 @@ public class OceanServiceTest {
       coordinateValidatorMock.validate(eq(OceanCannotBePlaceOccupiableException.class),
             eq(Message.getString("ocean.place.ship.error", coordinate.getX(), coordinate.getY())),
             eq(occupiableCoordinateReturnedByOcean), eq(CoordinateValidator.VALIDATE_EMPTY));
-      
-      //replay(coordinateValidatorMock);
-      
+
+      // replay(coordinateValidatorMock);
+
       oceanMock.occupyAtCoordinate(coordinate, ship);
-      //oceanMock.occupyAtCoordinate(coordinate, ship);
+      // oceanMock.occupyAtCoordinate(coordinate, ship);
 
       mockControl.replay();
 
@@ -96,18 +95,21 @@ public class OceanServiceTest {
       coordinateValidatorMock.validate(eq(OceanCannotBePlaceOccupiableException.class),
             eq(Message.getString("ocean.place.ship.error", theCoordinate.getX(), theCoordinate.getY())),
             eq(occupiableCoordinateReturnedByOcean), eq(CoordinateValidator.VALIDATE_EMPTY));
-      oceanMock.occupyAtCoordinate(theCoordinate, firstShip);
-      
+      oceanMock.occupyAtCoordinate(eq(theCoordinate), eq(firstShip));
+
       // second validation in oceaneventserviceimpl
-      occupiableCoordinateReturnedByOcean = new OccupiableCoordinate(theCoordinate.getX(),
-            theCoordinate.getY(), firstShip);
+      occupiableCoordinateReturnedByOcean = new OccupiableCoordinate(theCoordinate.getX(), theCoordinate.getY(),
+            firstShip);
       expect(oceanMock.queryCoordinate(eq(theCoordinate.getX()), eq(theCoordinate.getY()))).andReturn(
             occupiableCoordinateReturnedByOcean);
       coordinateValidatorMock.validate(eq(OceanCannotBePlaceOccupiableException.class),
             eq(Message.getString("ocean.place.ship.error", theCoordinate.getX(), theCoordinate.getY())),
             eq(occupiableCoordinateReturnedByOcean), eq(CoordinateValidator.VALIDATE_EMPTY));
+      expectLastCall().andThrow(
+            new OceanCannotBePlaceOccupiableException(Message.getString("ocean.place.ship.error", theCoordinate.getX(),
+                  theCoordinate.getY())));
 
-      replay(oceanMock);
+      mockControl.replay();
 
       thrown.expect(OceanCannotBePlaceOccupiableException.class);
       thrown.expectMessage(Message.getString("ocean.place.ship.error", theCoordinate.getX(), theCoordinate.getY()));
@@ -115,6 +117,6 @@ public class OceanServiceTest {
       objectToBeTest.processEvent(firstEvent);
       objectToBeTest.processEvent(secondEvent);
 
-      verify(oceanMock);
+      mockControl.verify();
    }
 }
