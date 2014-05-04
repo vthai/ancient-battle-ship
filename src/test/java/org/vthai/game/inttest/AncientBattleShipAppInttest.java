@@ -21,7 +21,7 @@ public class AncientBattleShipAppInttest {
    public static void setupSilkDi() {
       ObjectGraph objectGraph = ObjectGraph.create(new DependencyModule());
       AncientBattleShipApp ancientBattleShipApp = objectGraph.get(AncientBattleShipApp.class);
-      oceanEventService = ancientBattleShipApp.getOceanService();
+      oceanEventService = ancientBattleShipApp.getOceanEventService();
    }
 
    @Test

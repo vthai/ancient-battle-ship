@@ -32,7 +32,7 @@ public class Ocean {
       this.rangeValidator = rangValidator;
    }
 
-   public void initializeArea() {
+   private void initializeArea() {
       coordinates = new OccupiableCoordinate[column][row];
       Occupiable voidness = new Voidness();
 

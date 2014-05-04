@@ -13,6 +13,10 @@ public class Event {
    private Coordinate eventTarget;
 
    private EventType eventType;
+   
+   private String stage;
+   
+   private EventResult result;
 
    public Occupiable getEventOriginator() {
       return eventOriginator;

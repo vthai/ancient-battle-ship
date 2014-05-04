@@ -30,7 +30,7 @@ public class OceanEventServiceImpl implements OceanEventService {
    public void processEvent(Event event) {
       EventType eventType = event.getEventType();
       Coordinate coordinate = event.getEventTarget();
-
+      
       switch (eventType) {
          case PLACE:
             OccupiableCoordinate targetCoordinate = ocean.queryCoordinate(coordinate.getX(), coordinate.getY());
