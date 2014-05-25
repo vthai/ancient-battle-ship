@@ -16,7 +16,7 @@ import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordin
 import org.vthai.game.ancientbattleship.battlefield.event.Event;
 import org.vthai.game.ancientbattleship.battlefield.event.EventType;
 import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
-import org.vthai.game.ancientbattleship.battlefield.validator.CoordinateValidator;
+import org.vthai.game.ancientbattleship.battlefield.validator.impl.CoordinateValidator;
 import org.vthai.game.ancientbattleship.message.Message;
 import org.vthai.game.ancientbattleship.ships.DragonShip;
 import org.vthai.game.ancientbattleship.ships.Ship;

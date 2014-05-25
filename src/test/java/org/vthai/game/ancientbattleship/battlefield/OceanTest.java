@@ -1,5 +1,6 @@
 package org.vthai.game.ancientbattleship.battlefield;
 
+import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createControl;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expectLastCall;
@@ -20,7 +21,7 @@ import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OceanInvalidCoordinatesException;
 import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
-import org.vthai.game.ancientbattleship.battlefield.validator.Validator;
+import org.vthai.game.ancientbattleship.battlefield.validator.impl.ComparisonValidatorImpl;
 import org.vthai.game.ancientbattleship.message.Message;
 import org.vthai.game.ancientbattleship.ships.DragonShip;
 import org.vthai.game.ancientbattleship.ships.Ship;
@@ -29,7 +30,7 @@ public class OceanTest {
 
    private Random random;
 
-   private Validator rangeValidatorMock;
+   private ComparisonValidatorImpl<Integer> rangeValidatorMock;
 
    private Ocean ocean;
 
@@ -40,12 +41,13 @@ public class OceanTest {
    @Rule
    public ExpectedException thrown = ExpectedException.none();
 
+   @SuppressWarnings("unchecked")
    @Before
    public void setUp() {
       random = new Random(System.currentTimeMillis());
       
       IMocksControl mockControl = createControl();
-      rangeValidatorMock = mockControl.createMock(Validator.class);
+      rangeValidatorMock = mockControl.createMock(ComparisonValidatorImpl.class);
       ocean = new Ocean(rangeValidatorMock, row, column);
    }
 

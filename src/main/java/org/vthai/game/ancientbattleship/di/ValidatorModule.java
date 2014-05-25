@@ -3,9 +3,11 @@ package org.vthai.game.ancientbattleship.di;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.vthai.game.ancientbattleship.battlefield.validator.CoordinateValidator;
-import org.vthai.game.ancientbattleship.battlefield.validator.RangeValidator;
+import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordinate;
 import org.vthai.game.ancientbattleship.battlefield.validator.Validator;
+import org.vthai.game.ancientbattleship.battlefield.validator.impl.ComparisonValidatorImpl;
+import org.vthai.game.ancientbattleship.battlefield.validator.impl.CoordinateValidator;
+import org.vthai.game.ancientbattleship.battlefield.validator.impl.IntegerComparisonValidator;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,14 +22,14 @@ public class ValidatorModule {
    @Provides
    @Singleton
    @Named(ValidatorModule.oceanRangeValidatorId)
-   public Validator provideRangeValidator() {
-      return new RangeValidator();
+   public ComparisonValidatorImpl<Integer> provideRangeValidator() {
+      return new IntegerComparisonValidator();
    }
    
    @Provides
    @Singleton
    @Named(ValidatorModule.oceanCoordinateValidatorId)
-   public Validator provideCoordinateValidator() {
+   public Validator<OccupiableCoordinate, String> provideCoordinateValidator() {
       return new CoordinateValidator();
    }
 }

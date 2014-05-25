@@ -5,13 +5,11 @@ import javax.inject.Named;
 
 import org.vthai.game.ancientbattleship.battlefield.Commander;
 import org.vthai.game.ancientbattleship.battlefield.service.OceanEventService;
+import org.vthai.game.ancientbattleship.di.CommanderModule;
 import org.vthai.game.ancientbattleship.queue.OceanEventQueue;
 
 
 public class AncientBattleShipApp {
-   public static final String PARTY_A = "partyA"; 
-   
-   public static final String PARTY_B = "partyB"; 
    
    private OceanEventService oceanEventService;
    
@@ -23,7 +21,7 @@ public class AncientBattleShipApp {
    
    @Inject
    public AncientBattleShipApp(OceanEventService oceanEventService,
-         @Named(PARTY_A) Commander partyA, @Named(PARTY_B) Commander partyB) {
+         @Named(CommanderModule.commanderPartyA) Commander partyA, @Named(CommanderModule.commanderPartyB) Commander partyB) {
       this.oceanEventService = oceanEventService;
       this.partyA = partyA;
       this.partyB = partyB;

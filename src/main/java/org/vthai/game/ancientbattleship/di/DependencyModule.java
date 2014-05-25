@@ -9,7 +9,8 @@ import org.vthai.game.ancientbattleship.battlefield.service.OceanEventServiceImp
 import dagger.Module;
 import dagger.Provides;
 
-@Module(injects = AncientBattleShipApp.class, includes = { ValidatorModule.class, ConfigureModule.class }, complete = false)
+@Module(injects = AncientBattleShipApp.class, includes = { ValidatorModule.class, ConfigureModule.class,
+      CommanderModule.class }, complete = false)
 public class DependencyModule {
 
    @Provides

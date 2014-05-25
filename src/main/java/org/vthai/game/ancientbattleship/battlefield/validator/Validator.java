@@ -1,6 +1,7 @@
 package org.vthai.game.ancientbattleship.battlefield.validator;
 
+public interface Validator<T, A> {
 
-public interface Validator {
-   public void validate(Class<? extends RuntimeException> exceptionClass, String errorMessage, Object value, Object... arguments);
+   @SuppressWarnings("unchecked")
+   public void validate(Class<? extends RuntimeException> exceptionClass, String errorMessage, T value, A... arguments);
 }

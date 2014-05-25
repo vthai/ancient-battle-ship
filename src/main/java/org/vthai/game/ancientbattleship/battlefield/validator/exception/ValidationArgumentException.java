@@ -1,4 +1,4 @@
-package org.vthai.game.ancientbattleship.battlefield.validator;
+package org.vthai.game.ancientbattleship.battlefield.validator.exception;
 
 
 public class ValidationArgumentException extends RuntimeException {
