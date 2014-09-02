@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.vthai.game.ancientbattleship.battlefield.Ocean;
+import org.vthai.game.ancientbattleship.battlefield.command.Command;
+import org.vthai.game.ancientbattleship.battlefield.command.CommandType;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.OccupiableCoordinate;
-import org.vthai.game.ancientbattleship.battlefield.event.Event;
-import org.vthai.game.ancientbattleship.battlefield.event.EventType;
 import org.vthai.game.ancientbattleship.battlefield.objects.Voidness;
 import org.vthai.game.ancientbattleship.battlefield.validator.CoordinateValidator;
 import org.vthai.game.ancientbattleship.message.Message;
@@ -46,11 +46,11 @@ public class OceanServiceTest {
    @Test
    public void testPlaceShip() {
       final Coordinate coordinate = new Coordinate(20, 7);
-      Event event = new Event();
+      Command event = new Command();
       Ship ship = new DragonShip();
       event.setEventOriginator(ship);
       event.setEventTarget(coordinate);
-      event.setEventType(EventType.PLACE);
+      event.setCommandType(CommandType.PLACE);
 
       OccupiableCoordinate occupiableCoordinateReturnedByOcean = new OccupiableCoordinate(coordinate.getX(),
             coordinate.getY(), new Voidness());
@@ -67,7 +67,7 @@ public class OceanServiceTest {
 
       mockControl.replay();
 
-      objectToBeTest.processEvent(event);
+      objectToBeTest.recieveCommand(event);
 
       mockControl.verify();
    }
@@ -75,17 +75,17 @@ public class OceanServiceTest {
    @Test
    public void testPlaceShipAlreadyOccupied() {
       final Coordinate theCoordinate = new Coordinate(20, 7);
-      Event firstEvent = new Event();
+      Command firstEvent = new Command();
       Ship firstShip = new DragonShip();
       firstEvent.setEventOriginator(firstShip);
       firstEvent.setEventTarget(theCoordinate);
-      firstEvent.setEventType(EventType.PLACE);
+      firstEvent.setCommandType(CommandType.PLACE);
 
-      Event secondEvent = new Event();
+      Command secondEvent = new Command();
       Ship secondShip = new DragonShip();
       secondEvent.setEventOriginator(secondShip);
       secondEvent.setEventTarget(theCoordinate);
-      secondEvent.setEventType(EventType.PLACE);
+      secondEvent.setCommandType(CommandType.PLACE);
 
       // first validation in oceaneventserviceimpl
       OccupiableCoordinate occupiableCoordinateReturnedByOcean = new OccupiableCoordinate(theCoordinate.getX(),
@@ -114,8 +114,8 @@ public class OceanServiceTest {
       thrown.expect(OceanCannotBePlaceOccupiableException.class);
       thrown.expectMessage(Message.getString("ocean.place.ship.error", theCoordinate.getX(), theCoordinate.getY()));
 
-      objectToBeTest.processEvent(firstEvent);
-      objectToBeTest.processEvent(secondEvent);
+      objectToBeTest.recieveCommand(firstEvent);
+      objectToBeTest.recieveCommand(secondEvent);
 
       mockControl.verify();
    }

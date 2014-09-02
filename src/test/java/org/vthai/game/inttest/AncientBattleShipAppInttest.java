@@ -3,9 +3,9 @@ package org.vthai.game.inttest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.vthai.game.ancientbattleship.AncientBattleShipApp;
+import org.vthai.game.ancientbattleship.battlefield.command.Command;
+import org.vthai.game.ancientbattleship.battlefield.command.CommandType;
 import org.vthai.game.ancientbattleship.battlefield.coordinate.Coordinate;
-import org.vthai.game.ancientbattleship.battlefield.event.Event;
-import org.vthai.game.ancientbattleship.battlefield.event.EventType;
 import org.vthai.game.ancientbattleship.battlefield.service.OceanEventService;
 import org.vthai.game.ancientbattleship.di.DependencyModule;
 import org.vthai.game.ancientbattleship.ships.DragonShip;
@@ -26,12 +26,12 @@ public class AncientBattleShipAppInttest {
 
    @Test
    public void testOceanInit() {
-      Event event = new Event();
+      Command event = new Command();
       Ship ship = new DragonShip();
       event.setEventOriginator(ship);
       event.setEventTarget(new Coordinate(20, 7));
-      event.setEventType(EventType.PLACE);
+      event.setCommandType(CommandType.PLACE);
       
-      oceanEventService.processEvent(event);
+      oceanEventService.recieveCommand(event);
    }
 }

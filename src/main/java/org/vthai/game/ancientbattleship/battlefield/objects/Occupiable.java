@@ -1,8 +1,8 @@
 package org.vthai.game.ancientbattleship.battlefield.objects;
 
-import org.vthai.game.ancientbattleship.battlefield.event.Event;
+import org.vthai.game.ancientbattleship.battlefield.command.Command;
 
 
 public interface Occupiable {
-   public void absorbEvent(Event event);
+   public void absorbEvent(Command event);
 }
